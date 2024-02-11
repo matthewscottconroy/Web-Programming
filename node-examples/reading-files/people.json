@@ -1,0 +1,11 @@
+[
+	{ "firstname": "Homer", "lastname": "Thomas", "gender": "male", "smoker": false, "age": "40" },
+  { "firstname": "Janet", "lastname": "Sanchez", "gender": "female", "smoker": true, "age": "25" },
+  { "firstname": "Sarasti", "lastname": "Smith", "gender": "male", "smoker": true, "age": "28" },
+  { "firstname": "Mike", "lastname": "Smith", "gender": "male", "smoker": false, "age": "25" },
+  { "firstname": "Homer", "lastname": "Smith", "gender": "male", "smoker": false, "age": "28" },
+  { "firstname": "Samantha", "lastname": "Wright", "gender": "female", "smoker": true, "age": "31" },
+  { "firstname": "Barbara", "lastname": "Thomas", "gender": "female", "smoker": false, "age": "5" },
+  { "firstname": "Beetlejuice", "lastname": "Beetlejuice", "gender": "male", "smoker": true, "age": "89" },
+  { "firstname": "Mike", "lastname": "Judge", "gender": "male", "smoker": false, "age": "40" }
+]
