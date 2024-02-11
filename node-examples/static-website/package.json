@@ -1,0 +1,15 @@
+{
+  "name": "static-website",
+  "version": "1.0.0",
+  "description": "An example of a static web site served up by express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app.js"
+  },
+  "author": "Matthew Scott Conroy",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
