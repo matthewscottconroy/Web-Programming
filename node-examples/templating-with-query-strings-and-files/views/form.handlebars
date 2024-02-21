@@ -1,0 +1,38 @@
+<div>
+   <h2>Health Data Entry Form</h2>
+    <form action="/submit-health-data" method="post">
+        <label for="patientID">Patient ID:</label><br>
+        <input type="text" id="patientID" name="patientID"><br>
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age"><br>
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
+        <label for="bmi">BMI:</label><br>
+        <input type="text" id="bmi" name="bmi"><br>
+        <label for="bloodPressure">Blood Pressure:</label><br>
+        <input type="text" id="bloodPressure" name="bloodPressure"><br>
+        <label for="cholesterol">Cholesterol:</label><br>
+        <input type="text" id="cholesterol" name="cholesterol"><br>
+        <label for="diabetes">Diabetes:</label><br>
+        <select id="diabetes" name="diabetes">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+        <label for="smoker">Smoker:</label><br>
+        <select id="smoker" name="smoker">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+        <label for="physicalActivity">Physical Activity (hours/week):</label><br>
+        <input type="text" id="physicalActivity" name="physicalActivity"><br>
+        <label for="heartDisease">Heart Disease:</label><br>
+        <select id="heartDisease" name="heartDisease">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>

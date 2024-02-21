@@ -1,0 +1,15 @@
+You've reached the patients template.
+<table>
+    <thead>Patient Data</thead>
+<tbody>
+    {{#each data}}
+    <tr>
+    <td>{{this.PatientID}}</td>
+    <td>{{this.Smoker}}</td>
+    <td>{{this.Age}}</td>
+    <td>{{this.Gender}}</td>
+    </tr>
+    {{/each}}
+</tbody>
+</table>
+After the data.
