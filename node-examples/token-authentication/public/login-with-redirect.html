@@ -1,0 +1,15 @@
+<form action="/login" method="post">
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username" required><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br>
+    <input type="hidden" id="returnUrl" name="returnUrl">
+    <input type="submit" value="Login">
+</form>
+
+<script>
+    // Parse the query parameters to find returnUrl
+    const urlParams = new URLSearchParams(window.location.search);
+    const returnUrl = urlParams.get('returnUrl');
+    document.getElementById('returnUrl').value = returnUrl;
+</script>
