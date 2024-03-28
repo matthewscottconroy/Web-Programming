@@ -10,7 +10,7 @@ function generateJWT(payload, secretKey) {
 const args = process.argv.slice(2); // Skip the first two elements
 
 if (args.length !== 2) {
-  console.error('Usage: node generateJWT.js <payload as JSON> <secret key>');
+  console.error('Usage: node generate-token.js <payload as JSON> <secret key>');
   process.exit(1);
 }
 
