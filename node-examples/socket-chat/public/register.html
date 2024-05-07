@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form id="registerForm">
+        Username: <input type="text" id="username" required><br>
+        Password: <input type="password" id="password" required><br>
+        <button type="submit">Register</button>
+    </form>
+    <script>
+        document.getElementById('registerForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const res = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                })
+            });
+            const data = await res.json();
+            alert(data.message);
+            if (res.ok) window.location.href = '/login.html';
+        };
+    </script>
+</body>
+</html>
+

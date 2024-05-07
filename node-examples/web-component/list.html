@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List Web Component</title>
+<style>
+    todo-list {
+        display: block;
+    }
+    .category {
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .category > ul {
+        display: none;
+        margin: 0;
+        padding-left: 20px;
+    }
+    .strikethrough > label {
+        text-decoration: line-through;
+    }
+    item {
+        display: block;
+    }
+    item.strikethrough label {
+        text-decoration: line-through;
+    }
+</style>
+</head>
+<body>
+
+<todo-list>
+    <category name="Tasks">
+        <item>Shop</item>
+        <item>Exercise</item>
+        <category name="Purchases">
+            <category name="Electronics">
+                <item>Keyboard</item>
+                <item>Mouse</item>
+            </category>
+            <category name="Groceries">
+                <item>Tomatoes</item>
+                <item>Oatmeal</item>
+            </category>
+        </category>
+    </category>
+</todo-list>
+
+<template id="category-template">
+    <div class="category">
+        <label></label>
+        <ul></ul>
+    </div>
+</template>
+
+<template id="item-template">
+    <item><input type="checkbox"><label contenteditable="true"></label></item>
+</template>
+
+<script>
+class TodoList extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.buildList(this, this.children);
+    }
+
+    buildList(parent, elements) {
+        Array.from(elements).forEach(element => {
+            if (element.tagName.toLowerCase() === "category") {
+                const categoryTemplate = document.getElementById("category-template").content.cloneNode(true);
+                const div = categoryTemplate.querySelector('div');
+                const label = categoryTemplate.querySelector('label');
+                label.textContent = element.getAttribute('name');
+                const ul = categoryTemplate.querySelector('ul');
+
+                div.addEventListener('click', function (e) {
+                    if (e.target === label) {
+                        ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
+                    }
+                });
+
+                this.buildList(ul, element.children);
+                parent.appendChild(div);
+                div.appendChild(ul);
+            } else if (element.tagName.toLowerCase() === "item") {
+                const itemTemplate = document.getElementById("item-template").content.cloneNode(true);
+                const item = itemTemplate.querySelector('item');
+                const input = itemTemplate.querySelector('input');
+                const label = itemTemplate.querySelector('label');
+                label.textContent = element.textContent;
+
+                input.addEventListener('change', function () {
+                    if (input.checked) {
+                        item.classList.add('strikethrough');
+                    } else {
+                        item.classList.remove('strikethrough');
+                    }
+                });
+
+                parent.appendChild(item);
+            }
+        });
+    }
+}
+
+customElements.define('todo-list', TodoList);
+</script>
+
+</body>
+</html>
+
