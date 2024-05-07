@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple WebSocket Chat</title>
+</head>
+<body>
+    <h2>WebSocket Chat</h2>
+    <ul id="messages"></ul>
+    <form id="form">
+        <input id="input" autocomplete="off" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        // Create a new WebSocket connection.
+        const ws = new WebSocket('ws://localhost:3000');
+
+        ws.onopen = function() {
+            console.log('Connected to the server');
+        };
+
+        ws.onmessage = function(event) {
+            console.log('Message received: ' + event.data);
+            const message = document.createElement('li');
+            message.textContent = event.data;
+            document.getElementById('messages').appendChild(message);
+        };
+
+        ws.onerror = function(event) {
+            console.error('WebSocket error: ', event);
+        };
+
+        // Handle the form submission and send messages when the form is submitted.
+        document.getElementById('form').onsubmit = function(event) {
+            event.preventDefault();
+            const input = document.getElementById('input');
+            if (input.value) {
+                ws.send(input.value);
+                input.value = '';
+            }
+        };
+
+        // This function ensures that messages do not just pile up off-screen.
+        function updateScroll(){
+            var element = document.getElementById("messages");
+            element.scrollTop = element.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+
