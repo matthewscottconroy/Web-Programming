@@ -38,7 +38,10 @@ server.on('upgrade', (req, socket, head) => {
             console.log('Received:', message);
             // Broadcast message to all clients
             for (const client of clients) {
-                if (client.readyState === client.OPEN) {  // Check if the connection is still open
+							  console.log('client.OPEN value is: ', client.OPEN);
+							  console.log('Client state:', client.readyState);
+                if (client.readyState === 'open') {  // Check if the connection is still open
+									  console.log('Sending message:', message);
                     sendTextData(client, message);
                 }
             }
