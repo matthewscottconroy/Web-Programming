@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Albums Manager</title>
+<script>
+window.onload = function() {
+  fetchAlbums();
+};
+</script>
+</head>
+<body>
+<h1>Music Albums Manager</h1>
+
+<div>
+  <h2>All Albums</h2>
+  <ul id="albums-list"></ul>
+</div>
+
+<h2>Create Album</h2>
+<form id="create-form">
+  Artist: <input type="text" id="create-artist">
+  Album Title: <input type="text" id="create-title">
+  Year: <input type="text" id="create-year">
+  <button type="button" onclick="createAlbum()">Create</button>
+</form>
+
+<h2>Update Album</h2>
+<form id="update-form">
+  ID: <input type="text" id="update-id">
+  Artist: <input type="text" id="update-artist">
+  Album Title: <input type="text" id="update-title">
+  Year: <input type="text" id="update-year">
+  <button type="button" onclick="updateAlbum()">Update</button>
+</form>
+
+<h2>Delete Album</h2>
+<form id="delete-form">
+  ID: <input type="text" id="delete-id">
+  <button type="button" onclick="deleteAlbum()">Delete</button>
+</form>
+
+<script>
+function fetchAlbums() {
+  fetch('/albums')
+    .then(response => response.json())
+    .then(albums => {
+      const list = document.getElementById('albums-list');
+      list.innerHTML = '';
+      albums.forEach(album => {
+        const item = document.createElement('li');
+        item.textContent = `ID: ${album.id}, Artist: ${album.artist}, Album: ${album.albumTitle}, Year: ${album.year}`;
+        list.appendChild(item);
+      });
+    });
+}
+
+function sendRequest(method, url, body = null) {
+  return fetch(url, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: body ? JSON.stringify(body) : null
+  }).then(response => response.json().catch(() => {}));
+}
+
+function createAlbum() {
+  const artist = document.getElementById('create-artist').value;
+  const title = document.getElementById('create-title').value;
+  const year = document.getElementById('create-year').value;
+  sendRequest('POST', '/albums', { artist, albumTitle: title, year })
+    .then(() => fetchAlbums());
+}
+
+function updateAlbum() {
+  const id = document.getElementById('update-id').value;
+  const artist = document.getElementById('update-artist').value;
+  const title = document.getElementById('update-title').value;
+  const year = document.getElementById('update-year').value;
+  sendRequest('PUT', `/albums/${id}`, { artist, albumTitle: title, year })
+    .then(() => fetchAlbums());
+}
+
+function deleteAlbum() {
+  const id = document.getElementById('delete-id').value;
+  sendRequest('DELETE', `/albums/${id}`)
+    .then(() => fetchAlbums());
+}
+</script>
+
+</body>
+</html>
+
