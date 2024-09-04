@@ -1,0 +1,4 @@
+This is the example file.
+It has several lines.
+To use as a test for
+file manipulation.
